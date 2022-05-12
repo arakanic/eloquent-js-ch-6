@@ -9,25 +9,30 @@ class Group {
     constructor() {
         this.group = []
     }
-    add(value) {
-        if (!this.group.includes(value)) {
+    add (value) {
+        if (!this.has(value)) {
             this.group.push(value)
         }
     }
-    delete(value) {
-        if (this.group.includes(value)) {
+    delete (value) {
+        if (this.has(value)) {
             this.group.splice(this.group.indexOf(value), 1)
         }
     }
-    has(value) {
-        return this.group.hasOwnProperty(value)
+    has (value) {
+        return this.group.includes(value)
     }
-    static iterate(iterable) {
-        // new Group[...iterable]
-      } 
+    static from(iterable) {
+        let newGroup = new Group()
+        for (let item of iterable) {
+            newGroup.add(item)
+        }
+        return newGroup
+      }
   }
   
   let group = Group.from([10, 20]);
+  console.log(group)
   console.log(group.has(10));
   // → true
   console.log(group.has(30));
